@@ -16,7 +16,8 @@ class Resolver
             // @todo
             throw new \RuntimeException();
         }
-        $resolver = new (ElementResolveMapping::getResolver($bpmnElement['type']));
+        $resolverClass = ElementResolveMapping::getResolver($bpmnElement['type']);
+        $resolver = new $resolverClass();
         if (!$resolver instanceof ElementResolverInterface) {
             // @todo
             throw new \RuntimeException();

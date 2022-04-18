@@ -2,6 +2,7 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn;
 
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\Flow;
 use JetBrains\PhpStorm\ArrayShape;
 use Gupalo\BpmWorkflow\Bpmn\FlowElement\BeginFlowElement;
 use Gupalo\BpmWorkflow\Bpmn\ElementResolver\Resolver;
@@ -10,7 +11,7 @@ use SimpleXMLElement;
 
 class BpmnToFlowElementConverter
 {
-    public function process(string $content): ?BeginFlowElement
+    public function process(string $content): ?Flow
     {
         $bpmn = $this->load($content);
         $allElements = $this->groupByType($bpmn);
@@ -18,10 +19,10 @@ class BpmnToFlowElementConverter
             return null;
         }
         $this->validate($allElements);
-        $beginElement = new BeginFlowElement();
-        (new Resolver())->resolve($beginElement, array_shift($allElements['startEvent']), $allElements);
+        $flow = new Flow();
+        (new Resolver())->resolve($flow, array_shift($allElements['startEvent']), $allElements);
 
-        return $beginElement;
+        return $flow;
     }
 
     private function load(string $content): SimpleXMLElement
