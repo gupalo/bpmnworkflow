@@ -1,0 +1,33 @@
+{
+    "name": "gupalo/bpmworkflow",
+    "description": "Bpm Workflow",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Gupalo\\BpmWorkflow\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gupalo\\BpmWorkflow\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "ext-simplexml": "^8.0"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "platform": {
+            "php": "8.1"
+        },
+        "sort-packages": true
+    }
+}
