@@ -2,6 +2,8 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
 
+use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElement;
+use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
 use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
 use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayElement;
 use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayTransitionElement;
@@ -9,26 +11,22 @@ use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextElementAwareInterface;
 
 class GatewayElementResolver implements ElementResolverInterface
 {
-    use ElementByUidTrait;
-
-    public function resolve(
-        ElementInterface $ruleElement,
-        array            $bpmnElement,
-        array            $allElements
-    ): ElementInterface {
+    public function resolve(ElementInterface $ruleElement, BpmnElement $bpmnElement): ElementInterface
+    {
         if (!$ruleElement instanceof NextElementAwareInterface) {
             // @todo
             throw new \RuntimeException();
         }
-        $gateway = new GatewayElement($bpmnElement['data']);
+        $bpmnElementContainer = BpmnElementContainer::getInstance();
+        $gateway = new GatewayElement($bpmnElement->getData());
         $transitions = [];
-        foreach ($bpmnElement['outgoings'] as $outgoing) {
-            $flow = $allElements['sequenceFlow'][$outgoing];
-            $transition = new GatewayTransitionElement($bpmnElement['default'] === $outgoing, $flow['data']);
+        foreach ($bpmnElement->getOutgoingUids() as $outgoing) {
+            $flow = $bpmnElementContainer->getElementByUid($outgoing);
+            $transition = new GatewayTransitionElement($bpmnElement->getDefaultUid() === $outgoing, $flow->getData());
             $transitions[] = $transition;
-            $nextBpmnElement = $this->getBpmElementByUid($flow['targetRef'], $allElements);
+            $nextBpmnElement = $bpmnElementContainer->getElementByUid($flow->getTargetRefUid());
 
-            (new Resolver)->resolve($transition, $nextBpmnElement, $allElements);
+            (new Resolver)->resolve($transition, $nextBpmnElement);
         }
 
         $gateway->setTransitions($transitions);
