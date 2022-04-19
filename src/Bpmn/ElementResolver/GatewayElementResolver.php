@@ -11,22 +11,25 @@ use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextElementAwareInterface;
 
 class GatewayElementResolver implements ElementResolverInterface
 {
+    public function __construct(private BpmnElementContainer $bpmnElementContainer)
+    {
+    }
+
     public function resolve(ElementInterface $ruleElement, BpmnElement $bpmnElement): ElementInterface
     {
         if (!$ruleElement instanceof NextElementAwareInterface) {
             // @todo
             throw new \RuntimeException();
         }
-        $bpmnElementContainer = BpmnElementContainer::getInstance();
         $gateway = new GatewayElement($bpmnElement->getData());
         $transitions = [];
         foreach ($bpmnElement->getOutgoingUids() as $outgoing) {
-            $flow = $bpmnElementContainer->getElementByUid($outgoing);
+            $flow = $this->bpmnElementContainer->getElementByUid($outgoing);
             $transition = new GatewayTransitionElement($bpmnElement->getDefaultUid() === $outgoing, $flow->getData());
             $transitions[] = $transition;
-            $nextBpmnElement = $bpmnElementContainer->getElementByUid($flow->getTargetRefUid());
+            $nextBpmnElement = $this->bpmnElementContainer->getElementByUid($flow->getTargetRefUid());
 
-            (new Resolver)->resolve($transition, $nextBpmnElement);
+            (new Resolver($this->bpmnElementContainer))->resolve($transition, $nextBpmnElement);
         }
 
         $gateway->setTransitions($transitions);

@@ -6,8 +6,6 @@ use RuntimeException;
 
 class BpmnElementContainer
 {
-    private static ?BpmnElementContainer $instance = null;
-
     /** @var array | BpmnElement[] */
     private array $startEvents;
 
@@ -25,24 +23,6 @@ class BpmnElementContainer
 
     /** @var array | BpmnElement[] */
     private array $sequenceFlows;
-
-    private function __construct()
-    {
-    }
-
-    public static function getInstance(): BpmnElementContainer
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        
-        return self::$instance;
-    }
-    
-    public static function destroyInstance(): void
-    {
-        self::$instance = null;
-    }
 
     public function getStartEvents(): array
     {
@@ -126,7 +106,7 @@ class BpmnElementContainer
 
     public function setSequenceFlows(array $sequenceFlows): void
     {
-        $this->sequenceFlows = $flows;
+        $this->sequenceFlows = $sequenceFlows;
     }
 
     public function addSequenceFlow(BpmnElement $bpmnElement): void

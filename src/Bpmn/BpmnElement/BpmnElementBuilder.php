@@ -8,7 +8,7 @@ class BpmnElementBuilder
 {
     public function getBpmnElements(SimpleXMLElement $bpmn): BpmnElementContainer
     {
-        $bpmnElementContainer = BpmnElementContainer::getInstance();
+        $bpmnElementContainer = new BpmnElementContainer();
         $elements = (array)$bpmn->process;
         foreach ($elements as $type => $element) {
             if ($element instanceof SimpleXMLElement) {
