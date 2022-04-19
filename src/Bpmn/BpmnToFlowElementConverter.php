@@ -17,6 +17,7 @@ class BpmnToFlowElementConverter
         (new CommonValidator())->validate($bpmnElementContainer);
         $flow = new Flow();
         (new Resolver($bpmnElementContainer))->resolve($flow, $bpmnElementContainer->getStartEvents()[0]);
+
         return $flow;
     }
 
