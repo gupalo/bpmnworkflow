@@ -3,6 +3,7 @@
 namespace Gupalo\BpmWorkflow\Bpmn;
 
 use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElementBuilder;
+use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
 use Gupalo\BpmWorkflow\Bpmn\FlowElement\Flow;
 use Gupalo\BpmWorkflow\Bpmn\ElementResolver\Resolver;
 use Gupalo\BpmWorkflow\Bpmn\Validator\CommonValidator;
@@ -17,6 +18,7 @@ class BpmnToFlowElementConverter
         (new CommonValidator())->validate($bpmnElementContainer);
         $flow = new Flow();
         (new Resolver())->resolve($flow, $bpmnElementContainer->getStartEvents()[0]);
+        BpmnElementContainer::destroyInstance();
 
         return $flow;
     }

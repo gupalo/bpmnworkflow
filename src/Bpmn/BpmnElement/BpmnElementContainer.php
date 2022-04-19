@@ -39,7 +39,7 @@ class BpmnElementContainer
         return self::$instance;
     }
     
-    public function destroyInstance(): void
+    public static function destroyInstance(): void
     {
         self::$instance = null;
     }
