@@ -2,13 +2,13 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\FlowElementInterface;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
 
 interface ElementResolverInterface
 {
     public function resolve (
-        FlowElementInterface $ruleElement,
-        array                $bpmnElement,
-        array                $allElements
-    ): FlowElementInterface;
+        ElementInterface $ruleElement,
+        array            $bpmnElement,
+        array            $allElements
+    ): ElementInterface;
 }

@@ -2,7 +2,7 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
 
-class LinkFlowElement implements FlowElementInterface
+class LinkElement implements ElementInterface
 {
     public function __construct(private string $name)
     {

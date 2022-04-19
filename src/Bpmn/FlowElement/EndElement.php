@@ -2,6 +2,6 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
 
-interface FlowElementInterface
+class EndElement implements ElementInterface
 {
 }

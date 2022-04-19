@@ -2,7 +2,7 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
 
-class Flow implements ElementInterface, NextElementAwareInterface
+class BeginElement implements ElementInterface, NextElementAwareInterface
 {
     use NextElementTrait;
 }

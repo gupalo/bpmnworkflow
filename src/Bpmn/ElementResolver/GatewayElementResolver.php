@@ -2,29 +2,29 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\FlowElementInterface;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayFlowElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayTransitionFlowElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextFlowElementAwareInterface;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayElement;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayTransitionElement;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextElementAwareInterface;
 
 class GatewayElementResolver implements ElementResolverInterface
 {
     use ElementByUidTrait;
 
     public function resolve(
-        FlowElementInterface $ruleElement,
-        array                $bpmnElement,
-        array                $allElements
-    ): FlowElementInterface {
-        if (!$ruleElement instanceof NextFlowElementAwareInterface) {
+        ElementInterface $ruleElement,
+        array            $bpmnElement,
+        array            $allElements
+    ): ElementInterface {
+        if (!$ruleElement instanceof NextElementAwareInterface) {
             // @todo
             throw new \RuntimeException();
         }
-        $gateway = new GatewayFlowElement($bpmnElement['data']);
+        $gateway = new GatewayElement($bpmnElement['data']);
         $transitions = [];
         foreach ($bpmnElement['outgoings'] as $outgoing) {
             $flow = $allElements['sequenceFlow'][$outgoing];
-            $transition = new GatewayTransitionFlowElement($bpmnElement['default'] === $outgoing, $flow['data']);
+            $transition = new GatewayTransitionElement($bpmnElement['default'] === $outgoing, $flow['data']);
             $transitions[] = $transition;
             $nextBpmnElement = $this->getBpmElementByUid($flow['targetRef'], $allElements);
 

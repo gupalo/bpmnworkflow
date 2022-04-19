@@ -4,7 +4,6 @@ namespace Gupalo\BpmWorkflow\Bpmn;
 
 use Gupalo\BpmWorkflow\Bpmn\FlowElement\Flow;
 use JetBrains\PhpStorm\ArrayShape;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\BeginFlowElement;
 use Gupalo\BpmWorkflow\Bpmn\ElementResolver\Resolver;
 use Gupalo\BpmWorkflow\Bpmn\Validator\CommonValidator;
 use SimpleXMLElement;

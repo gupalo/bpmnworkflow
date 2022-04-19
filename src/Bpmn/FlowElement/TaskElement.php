@@ -2,9 +2,9 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
 
-class TaskFlowElement implements FlowElementInterface, NextFlowElementAwareInterface
+class TaskElement implements ElementInterface, NextElementAwareInterface
 {
-    use NextFlowElementTrait;
+    use NextElementTrait;
 
     public function __construct(private string $name)
     {

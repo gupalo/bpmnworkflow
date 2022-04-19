@@ -2,9 +2,9 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
 
-class GatewayTransitionFlowElement implements FlowElementInterface, NextFlowElementAwareInterface
+class GatewayTransitionElement implements ElementInterface, NextElementAwareInterface
 {
-    use NextFlowElementTrait;
+    use NextElementTrait;
 
     public function __construct(private bool $isDefault, private ?string $condition)
     {

@@ -4,10 +4,10 @@ namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
 
 use JetBrains\PhpStorm\Pure;
 
-class GatewayFlowElement implements FlowElementInterface
+class GatewayElement implements ElementInterface
 {
     /**
-     * @var array|GatewayTransitionFlowElement[]
+     * @var array|GatewayTransitionElement[]
      */
     private array $transitions = [];
 
@@ -33,7 +33,7 @@ class GatewayFlowElement implements FlowElementInterface
     private function sortTransition(array $transitions): array
     {
         $transitionWithKey = [];
-        /** @var GatewayTransitionFlowElement $transition */
+        /** @var GatewayTransitionElement $transition */
         foreach ($transitions as $transition) {
             if ($transition->isDefault()) {
                 continue;
@@ -46,7 +46,7 @@ class GatewayFlowElement implements FlowElementInterface
     }
 
     #[Pure]
-    private function getDefaultTransition(): ?GatewayTransitionFlowElement
+    private function getDefaultTransition(): ?GatewayTransitionElement
     {
         foreach ($this->transitions as $transition) {
             if ($transition->isDefault()) {

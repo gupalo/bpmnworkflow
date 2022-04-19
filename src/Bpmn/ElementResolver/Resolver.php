@@ -2,17 +2,17 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\FlowElementInterface;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextFlowElementAwareInterface;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextElementAwareInterface;
 use Gupalo\BpmWorkflow\Bpmn\Mapping\ElementResolveMapping;
 
 class Resolver
 {
     use ElementByUidTrait;
 
-    public function resolve(FlowElementInterface $ruleElement, array $bpmnElement, array $allElements): void
+    public function resolve(ElementInterface $ruleElement, array $bpmnElement, array $allElements): void
     {
-        if (!$ruleElement instanceof NextFlowElementAwareInterface) {
+        if (!$ruleElement instanceof NextElementAwareInterface) {
             // @todo
             throw new \RuntimeException();
         }

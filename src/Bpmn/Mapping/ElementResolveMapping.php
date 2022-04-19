@@ -8,7 +8,6 @@ use Gupalo\BpmWorkflow\Bpmn\ElementResolver\EndElementResolver;
 use Gupalo\BpmWorkflow\Bpmn\ElementResolver\GatewayElementResolver;
 use Gupalo\BpmWorkflow\Bpmn\ElementResolver\LinkElementResolver;
 use Gupalo\BpmWorkflow\Bpmn\ElementResolver\TaskElementResolver;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\BeginFlowElement;
 
 class ElementResolveMapping
 {

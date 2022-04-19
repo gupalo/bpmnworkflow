@@ -2,19 +2,18 @@
 
 namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\BeginFlowElement;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\BeginElement;
 use JetBrains\PhpStorm\Pure;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\FlowElementInterface;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\LinkFlowElement;
+use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
 
 class BeginElementResolver implements ElementResolverInterface
 {
     #[Pure]
     public function resolve(
-        FlowElementInterface $ruleElement,
-        array                $bpmnElement,
-        array                $allElements
-    ): FlowElementInterface {
-        return new BeginFlowElement();
+        ElementInterface $ruleElement,
+        array            $bpmnElement,
+        array            $allElements
+    ): ElementInterface {
+        return new BeginElement();
     }
 }
