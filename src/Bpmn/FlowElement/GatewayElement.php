@@ -17,7 +17,7 @@ class GatewayElement implements ElementInterface
 
     public function getTransitions(): array
     {
-        return $this->transitions;
+        return $this->sortTransition($this->transitions);
     }
 
     public function setTransitions(array $transitions): void
@@ -46,7 +46,7 @@ class GatewayElement implements ElementInterface
     }
 
     #[Pure]
-    private function getDefaultTransition(): ?GatewayTransitionElement
+    public function getDefaultTransition(): ?GatewayTransitionElement
     {
         foreach ($this->transitions as $transition) {
             if ($transition->isDefault()) {

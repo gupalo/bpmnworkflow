@@ -17,7 +17,7 @@ class TransitionResolver
         return $execute->execute($gatewayResult, $gatewayTransitionElement->getCondition());
     }
 
-    public function getConditionExecute(string $condition): ConditionExecuteInterface
+    private function getConditionExecute(string $condition): ConditionExecuteInterface
     {
         return $this->conditionExecuteContainer->getConditionExecute($condition);
     }

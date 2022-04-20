@@ -10,7 +10,7 @@ class GatewayHandler
 {
     use TaskGatewayNamingStrategyTrait;
 
-    public function __construct(private TransitionContainer $gatewayContainer)
+    public function __construct(private GatewayContainer $gatewayContainer)
     {
     }
 
@@ -21,7 +21,7 @@ class GatewayHandler
 
         $gateway = $this->gatewayContainer->getGateway($nameGateway);
 
-        if (!$gateway instanceof TransitionInterface) {
+        if (!$gateway instanceof GatewayInterface) {
             // @todo handle error
             throw  new \RuntimeException();
         }
