@@ -1,11 +1,11 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn;
+namespace Gupalo\BpmnWorkflow\Bpmn;
 
-use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElementBuilder;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\Flow;
-use Gupalo\BpmWorkflow\Bpmn\ElementResolver\Resolver;
-use Gupalo\BpmWorkflow\Bpmn\Validator\CommonValidator;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElementBuilder;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\Flow;
+use Gupalo\BpmnWorkflow\Bpmn\ElementResolver\Resolver;
+use Gupalo\BpmnWorkflow\Bpmn\Validator\CommonValidator;
 use SimpleXMLElement;
 
 class BpmnToFlowElementConverter

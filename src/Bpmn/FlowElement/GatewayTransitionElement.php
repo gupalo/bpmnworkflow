@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\FlowElement;
+namespace Gupalo\BpmnWorkflow\Bpmn\FlowElement;
 
 class GatewayTransitionElement implements ElementInterface, NextElementAwareInterface
 {

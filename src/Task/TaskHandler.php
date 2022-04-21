@@ -1,9 +1,9 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Task;
+namespace Gupalo\BpmnWorkflow\Task;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\TaskElement;
-use Gupalo\BpmWorkflow\Context\Context;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\TaskElement;
+use Gupalo\BpmnWorkflow\Context\Context;
 
 class TaskHandler
 {

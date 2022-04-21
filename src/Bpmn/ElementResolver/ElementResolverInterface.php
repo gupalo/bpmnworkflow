@@ -1,9 +1,9 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
+namespace Gupalo\BpmnWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\ElementInterface;
 
 interface ElementResolverInterface
 {

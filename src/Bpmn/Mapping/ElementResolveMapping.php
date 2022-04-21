@@ -1,13 +1,13 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\Mapping;
+namespace Gupalo\BpmnWorkflow\Bpmn\Mapping;
 
-use Gupalo\BpmWorkflow\Bpmn\Dictionary\BpmnElementType;
-use Gupalo\BpmWorkflow\Bpmn\ElementResolver\BeginElementResolver;
-use Gupalo\BpmWorkflow\Bpmn\ElementResolver\EndElementResolver;
-use Gupalo\BpmWorkflow\Bpmn\ElementResolver\GatewayElementResolver;
-use Gupalo\BpmWorkflow\Bpmn\ElementResolver\LinkElementResolver;
-use Gupalo\BpmWorkflow\Bpmn\ElementResolver\TaskElementResolver;
+use Gupalo\BpmnWorkflow\Bpmn\Dictionary\BpmnElementType;
+use Gupalo\BpmnWorkflow\Bpmn\ElementResolver\BeginElementResolver;
+use Gupalo\BpmnWorkflow\Bpmn\ElementResolver\EndElementResolver;
+use Gupalo\BpmnWorkflow\Bpmn\ElementResolver\GatewayElementResolver;
+use Gupalo\BpmnWorkflow\Bpmn\ElementResolver\LinkElementResolver;
+use Gupalo\BpmnWorkflow\Bpmn\ElementResolver\TaskElementResolver;
 
 class ElementResolveMapping
 {

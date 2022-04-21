@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\BpmnElement;
+namespace Gupalo\BpmnWorkflow\Bpmn\BpmnElement;
 
 class BpmnElement
 {

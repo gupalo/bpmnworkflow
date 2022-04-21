@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Gateway;
+namespace Gupalo\BpmnWorkflow\Gateway;
 
 class GatewayContainer
 {
@@ -11,7 +11,7 @@ class GatewayContainer
         return $this->gateways;
     }
 
-    public function getGateway(string $key): ?TransitionInterface
+    public function getGateway(string $key): ?GatewayInterface
     {
         return $this->tasks[$key] ?? null;
     }
@@ -21,7 +21,7 @@ class GatewayContainer
         $this->gateways = $gateways;
     }
 
-    public function addGateway(string $key, TransitionInterface $gateway): void
+    public function addGateway(string $key, GatewayInterface $gateway): void
     {
         $this->gateways[$key] = $gateway;
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
+namespace Gupalo\BpmnWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElement;
-use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\NextElementAwareInterface;
-use Gupalo\BpmWorkflow\Bpmn\Mapping\ElementResolveMapping;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\ElementInterface;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\NextElementAwareInterface;
+use Gupalo\BpmnWorkflow\Bpmn\Mapping\ElementResolveMapping;
 
 class Resolver
 {

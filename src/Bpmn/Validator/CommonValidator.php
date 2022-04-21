@@ -1,8 +1,8 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\Validator;
+namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
-use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
 
 class CommonValidator
 {

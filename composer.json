@@ -1,18 +1,18 @@
 {
     "name": "gupalo/bpmnworkflow",
-    "description": "Bpm Workflow",
+    "description": "Bpmn Workflow",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Gupalo\\BpmWorkflow\\": "src/"
+            "Gupalo\\BpmnWorkflow\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Gupalo\\BpmWorkflow\\Tests\\": "tests/"
+            "Gupalo\\BpmnWorkflow\\Tests\\": "tests/"
         }
     },
     "require": {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Gateway;
+namespace Gupalo\BpmnWorkflow\Gateway;
 
-use Gupalo\BpmWorkflow\Context\Context;
+use Gupalo\BpmnWorkflow\Context\Context;
 
 interface GatewayInterface
 {
-    public function execute(array $params, Context $context): string;
+    public function execute(array $params, Context $context);
 }

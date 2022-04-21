@@ -1,20 +1,20 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Workflow;
+namespace Gupalo\BpmnWorkflow\Workflow;
 
-use Gupalo\BpmWorkflow\Bpmn\BpmnToFlowElementConverter;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\BeginElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\EndElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\LinkElement;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\TaskElement;
-use Gupalo\BpmWorkflow\Context\Context;
-use Gupalo\BpmWorkflow\Gateway\GatewayContainer;
-use Gupalo\BpmWorkflow\Gateway\GatewayHandler;
-use Gupalo\BpmWorkflow\Task\TaskContainer;
-use Gupalo\BpmWorkflow\Task\TaskHandler;
-use Gupalo\BpmWorkflow\Transition\ConditionExecuteContainer;
-use Gupalo\BpmWorkflow\Transition\TransitionResolver;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnToFlowElementConverter;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\BeginElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\EndElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\GatewayElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\LinkElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\TaskElement;
+use Gupalo\BpmnWorkflow\Context\Context;
+use Gupalo\BpmnWorkflow\Gateway\GatewayContainer;
+use Gupalo\BpmnWorkflow\Gateway\GatewayHandler;
+use Gupalo\BpmnWorkflow\Task\TaskContainer;
+use Gupalo\BpmnWorkflow\Task\TaskHandler;
+use Gupalo\BpmnWorkflow\Transition\ConditionContainer;
+use Gupalo\BpmnWorkflow\Transition\TransitionResolver;
 
 class Workflow
 {
@@ -23,13 +23,13 @@ class Workflow
     private TransitionResolver $transitionResolver;
 
     public function __construct(
-        ConditionExecuteContainer $conditionExecuteContainer,
-        GatewayContainer $gatewayContainer,
-        TaskContainer $taskContainer,
+        ConditionContainer $conditionContainer,
+        GatewayContainer   $gatewayContainer,
+        TaskContainer      $taskContainer,
     ) {
         $this->taskHandler = new TaskHandler($taskContainer);
         $this->gatewayHandler = new GatewayHandler($gatewayContainer);
-        $this->transitionResolver = new TransitionResolver($conditionExecuteContainer);
+        $this->transitionResolver = new TransitionResolver($conditionContainer);
     }
 
     public function walkFlow(string $xml, Context $context): Context

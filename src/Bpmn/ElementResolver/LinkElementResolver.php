@@ -1,11 +1,11 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\ElementResolver;
+namespace Gupalo\BpmnWorkflow\Bpmn\ElementResolver;
 
-use Gupalo\BpmWorkflow\Bpmn\BpmnElement\BpmnElement;
+use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
 use JetBrains\PhpStorm\Pure;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\ElementInterface;
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\LinkElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\ElementInterface;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\LinkElement;
 
 class LinkElementResolver implements ElementResolverInterface
 {

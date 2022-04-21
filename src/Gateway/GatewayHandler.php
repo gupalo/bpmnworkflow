@@ -1,10 +1,10 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Gateway;
+namespace Gupalo\BpmnWorkflow\Gateway;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayElement;
-use Gupalo\BpmWorkflow\Context\Context;
-use Gupalo\BpmWorkflow\Task\TaskGatewayNamingStrategyTrait;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\GatewayElement;
+use Gupalo\BpmnWorkflow\Context\Context;
+use Gupalo\BpmnWorkflow\Task\TaskGatewayNamingStrategyTrait;
 
 class GatewayHandler
 {

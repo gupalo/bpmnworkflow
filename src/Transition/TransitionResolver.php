@@ -1,24 +1,24 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Transition;
+namespace Gupalo\BpmnWorkflow\Transition;
 
-use Gupalo\BpmWorkflow\Bpmn\FlowElement\GatewayTransitionElement;
+use Gupalo\BpmnWorkflow\Bpmn\FlowElement\GatewayTransitionElement;
 
 class TransitionResolver
 {
-    public function __construct(private ConditionExecuteContainer $conditionExecuteContainer)
+    public function __construct(private ConditionContainer $conditionContainer)
     {
     }
 
-    public function matchTransition(string $gatewayResult, GatewayTransitionElement $gatewayTransitionElement): bool
+    public function matchTransition($gatewayResult, GatewayTransitionElement $gatewayTransitionElement): bool
     {
-        $execute = $this->getConditionExecute($gatewayTransitionElement->getCondition());
+        $execute = $this->getCondition($gatewayTransitionElement->getCondition());
 
         return $execute->execute($gatewayResult, $gatewayTransitionElement->getCondition());
     }
 
-    private function getConditionExecute(string $condition): ConditionExecuteInterface
+    private function getCondition(string $condition): ConditionInterface
     {
-        return $this->conditionExecuteContainer->getConditionExecute($condition);
+        return $this->conditionContainer->getCondition($condition);
     }
 }

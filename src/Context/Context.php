@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Context;
+namespace Gupalo\BpmnWorkflow\Context;
 
 class Context
 {

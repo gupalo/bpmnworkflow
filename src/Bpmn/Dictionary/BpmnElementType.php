@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Bpmn\Dictionary;
+namespace Gupalo\BpmnWorkflow\Bpmn\Dictionary;
 
 class BpmnElementType
 {

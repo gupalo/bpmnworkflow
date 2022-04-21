@@ -1,8 +1,8 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Task;
+namespace Gupalo\BpmnWorkflow\Task;
 
-use Gupalo\BpmWorkflow\Context\Context;
+use Gupalo\BpmnWorkflow\Context\Context;
 
 interface TaskInterface
 {

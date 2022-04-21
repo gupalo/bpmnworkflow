@@ -1,6 +1,6 @@
 <?php
 
-namespace Gupalo\BpmWorkflow\Task;
+namespace Gupalo\BpmnWorkflow\Task;
 
 class TaskContainer
 {
