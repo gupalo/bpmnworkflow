@@ -7,8 +7,7 @@ class Cart
     public function __construct(
         private array $items,
         private string $locale,
-        private float $price,
-        private float $discount
+        private float $price
     ) {
     }
     
@@ -26,11 +25,6 @@ class Cart
     {
         return $this->price;
     }
-    
-    public function getDiscount(): float
-    {
-        return $this->discount;
-    }
 
     public function setItems(array $items): void
     {
@@ -45,10 +39,5 @@ class Cart
     public function setPrice(float $price): void
     {
         $this->price = $price;
-    }
-
-    public function setDiscount(float $discount): void
-    {
-        $this->discount = $discount;
     }
 }

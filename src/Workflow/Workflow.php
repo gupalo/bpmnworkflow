@@ -70,6 +70,7 @@ class Workflow
 
             if ($currentElement instanceof BeginElement) {
                 $currentElement = $currentElement->getNextElement();
+                continue;
             }
 
             if (!$currentElement) {

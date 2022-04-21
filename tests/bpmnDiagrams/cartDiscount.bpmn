@@ -11,26 +11,26 @@
       <bpmn2:outgoing>Flow_0e6ujle</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="Flow_0188ao4" sourceRef="Event_0u1wfmo" targetRef="Gateway_1rhxq6q" />
-    <bpmn2:task id="Activity_09far9q" name="discount(50)">
+    <bpmn2:task id="Activity_09far9q" name="discount(10)">
       <bpmn2:incoming>Flow_1gb8qgb</bpmn2:incoming>
       <bpmn2:outgoing>Flow_1exmzme</bpmn2:outgoing>
     </bpmn2:task>
-    <bpmn2:sequenceFlow id="Flow_1gb8qgb" name="&#62;1000" sourceRef="Gateway_1rhxq6q" targetRef="Activity_09far9q" />
+    <bpmn2:sequenceFlow id="Flow_1gb8qgb" name="&#60; 1000" sourceRef="Gateway_1rhxq6q" targetRef="Activity_09far9q" />
     <bpmn2:task id="Activity_0ys0n5j" name="withoutDiscount">
       <bpmn2:incoming>Flow_1meg0gy</bpmn2:incoming>
       <bpmn2:outgoing>Flow_1hx94pu</bpmn2:outgoing>
     </bpmn2:task>
     <bpmn2:sequenceFlow id="Flow_1meg0gy" sourceRef="Gateway_1rhxq6q" targetRef="Activity_0ys0n5j" />
-    <bpmn2:task id="Activity_169xudp" name="discount(10)">
+    <bpmn2:task id="Activity_169xudp" name="discount(50)">
       <bpmn2:incoming>Flow_0e6ujle</bpmn2:incoming>
       <bpmn2:outgoing>Flow_1fapnnf</bpmn2:outgoing>
     </bpmn2:task>
-    <bpmn2:sequenceFlow id="Flow_0e6ujle" name="&#62; 100" sourceRef="Gateway_1rhxq6q" targetRef="Activity_169xudp" />
-    <bpmn2:intermediateThrowEvent id="Event_1jdj58z" name="flowSmallPrice">
+    <bpmn2:sequenceFlow id="Flow_0e6ujle" name="&#62; 1000" sourceRef="Gateway_1rhxq6q" targetRef="Activity_169xudp" />
+    <bpmn2:intermediateThrowEvent id="Event_1jdj58z" name="flowBigPrice">
       <bpmn2:incoming>Flow_1fapnnf</bpmn2:incoming>
     </bpmn2:intermediateThrowEvent>
     <bpmn2:sequenceFlow id="Flow_1fapnnf" sourceRef="Activity_169xudp" targetRef="Event_1jdj58z" />
-    <bpmn2:exclusiveGateway id="Gateway_078fr2i" name="getUserLoacle" default="Flow_1bh0ljj">
+    <bpmn2:exclusiveGateway id="Gateway_078fr2i" name="getUserLocale" default="Flow_1bh0ljj">
       <bpmn2:incoming>Flow_1exmzme</bpmn2:incoming>
       <bpmn2:outgoing>Flow_0sqqnp4</bpmn2:outgoing>
       <bpmn2:outgoing>Flow_1bh0ljj</bpmn2:outgoing>
@@ -99,19 +99,22 @@
         <di:waypoint x="270" y="120" />
         <di:waypoint x="360" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="272" y="166" width="28" height="14" />
+          <dc:Bounds x="269" y="166" width="34" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1meg0gy_di" bpmnElement="Flow_1meg0gy">
         <di:waypoint x="270" y="265" />
         <di:waypoint x="270" y="350" />
         <di:waypoint x="360" y="350" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="271" y="305" width="28" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1gb8qgb_di" bpmnElement="Flow_1gb8qgb">
         <di:waypoint x="295" y="240" />
         <di:waypoint x="360" y="240" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="312" y="222" width="31" height="14" />
+          <dc:Bounds x="311" y="222" width="34" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0188ao4_di" bpmnElement="Flow_0188ao4">

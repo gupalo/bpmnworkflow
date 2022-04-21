@@ -12,8 +12,7 @@ class DiscountTask implements TaskInterface
     {
         /** @var Cart $cart */
         $cart = $context->getData();
-
-        $cart->setDiscount((float)$params[0]);
+        
         $cart->setPrice($cart->getPrice()*((100-$params[0])/100));
     }
 }
