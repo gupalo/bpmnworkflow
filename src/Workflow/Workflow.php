@@ -53,7 +53,6 @@ class Workflow
 
                     }
                 }
-
                 $currentElement = $currentElement->getDefaultTransition()->getNextElement();
                 continue;
             }
