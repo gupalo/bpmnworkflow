@@ -40,6 +40,6 @@ class WorkflowTest extends TestCase
         $context = new Context($cart);
 
         $workflow = new Workflow($conditionContainer, $gatewayContainer, $taskContainer);
-        $workflow->walkFlow(file_get_contents(__DIR__ . '/../BpmnDiagrams/cartDiscount.Bpmn'), $context);
+        $workflow->walkFlow(file_get_contents(__DIR__ . '/../bpmnDiagrams/cartDiscount.bpmn'), $context);
     }
 }
