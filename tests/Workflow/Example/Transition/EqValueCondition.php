@@ -14,6 +14,8 @@ class EqValueCondition implements ConditionInterface
         if ((string)$valueEqual == (string)$gatewayResult) {
             return true;
         }
+        
+        return false;
     }
 
     public function match(string $identity): bool
@@ -22,5 +24,7 @@ class EqValueCondition implements ConditionInterface
         if ($identity[0] === '=') {
             return true;
         }
+        
+        return false;
     }
 }

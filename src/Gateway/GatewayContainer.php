@@ -13,7 +13,7 @@ class GatewayContainer
 
     public function getGateway(string $key): ?GatewayInterface
     {
-        return $this->tasks[$key] ?? null;
+        return $this->gateways[$key] ?? null;
     }
 
     public function setGateways(array $gateways): void

@@ -15,6 +15,9 @@ class GatewayElement implements ElementInterface
     {
     }
 
+    /**
+     * @return array | GatewayTransitionElement[]
+     */
     public function getTransitions(): array
     {
         return $this->sortTransition($this->transitions);

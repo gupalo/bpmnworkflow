@@ -11,11 +11,6 @@
             "Gupalo\\BpmnWorkflow\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Gupalo\\BpmnWorkflow\\Tests\\": "tests/"
-        }
-    },
     "require": {
         "php": ">=8.1",
         "ext-simplexml": "^8.0"

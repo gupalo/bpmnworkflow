@@ -32,7 +32,7 @@ class Workflow
         $this->transitionResolver = new TransitionResolver($conditionContainer);
     }
 
-    public function walkFlow(string $xml, Context $context): Context
+    public function walkFlow(string $xml, Context $context): ?string
     {
         $flow = (new BpmnToFlowElementConverter())->process($xml);
         $currentElement = $flow->getNextElement();
@@ -46,14 +46,17 @@ class Workflow
             if ($currentElement instanceof GatewayElement) {
                 $gatewayResult = $this->gatewayHandler->execute($currentElement, $context);
                 $transitionElements = $currentElement->getTransitions();
+                $currentTransition = null;
                 foreach ($transitionElements as $transitionElement) {
                     if ($this->transitionResolver->matchTransition($gatewayResult, $transitionElement)) {
-                        $currentElement = $transitionElement->getNextElement();
+                        $currentTransition = $transitionElement;
                         break;
 
                     }
                 }
-                $currentElement = $currentElement->getDefaultTransition()->getNextElement();
+                $currentElement = $currentTransition ?
+                    $currentTransition->getNextElement() :
+                    $currentElement->getDefaultTransition()->getNextElement();
                 continue;
             }
 
@@ -62,7 +65,7 @@ class Workflow
             }
 
             if ($currentElement instanceof EndElement) {
-                return $context;
+                return null;
             }
 
             if ($currentElement instanceof BeginElement) {
@@ -70,10 +73,10 @@ class Workflow
             }
 
             if (!$currentElement) {
-                return $context;
+                return null;
             }
         }
 
-        return $context;
+        return null;
     }
 }
