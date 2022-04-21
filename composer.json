@@ -7,6 +7,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
+            "Gupalo\\BpmnWorkflow\\Tests\\": "tests/",
             "Gupalo\\BpmnWorkflow\\": "src/"
         }
     },
