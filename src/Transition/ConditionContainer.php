@@ -2,6 +2,8 @@
 
 namespace Gupalo\BpmnWorkflow\Transition;
 
+use Gupalo\BpmnWorkflow\Bpmn\Exception\ConditionNotFoundException;
+
 class ConditionContainer
 {
     /** @var array | ConditionInterface[] */
@@ -20,8 +22,7 @@ class ConditionContainer
             }
         }
 
-        // @todo handle error
-        throw new \RuntimeException();
+        throw new ConditionNotFoundException($identity);
     }
 
     public function setConditions(array $conditions): void

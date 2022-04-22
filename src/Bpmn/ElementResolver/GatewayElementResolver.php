@@ -4,6 +4,7 @@ namespace Gupalo\BpmnWorkflow\Bpmn\ElementResolver;
 
 use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
 use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
+use Gupalo\BpmnWorkflow\Bpmn\Exception\NextElementNotFoundException;
 use Gupalo\BpmnWorkflow\Bpmn\FlowElement\ElementInterface;
 use Gupalo\BpmnWorkflow\Bpmn\FlowElement\GatewayElement;
 use Gupalo\BpmnWorkflow\Bpmn\FlowElement\GatewayTransitionElement;
@@ -15,11 +16,10 @@ class GatewayElementResolver implements ElementResolverInterface
     {
     }
 
-    public function resolve(ElementInterface $ruleElement, BpmnElement $bpmnElement): ElementInterface
+    public function resolve(ElementInterface $element, BpmnElement $bpmnElement): ElementInterface
     {
-        if (!$ruleElement instanceof NextElementAwareInterface) {
-            // @todo
-            throw new \RuntimeException();
+        if (!$element instanceof NextElementAwareInterface) {
+            throw new NextElementNotFoundException();
         }
         $gateway = new GatewayElement($bpmnElement->getData());
         $transitions = [];
@@ -33,7 +33,7 @@ class GatewayElementResolver implements ElementResolverInterface
         }
 
         $gateway->setTransitions($transitions);
-        $ruleElement->setNextElement($gateway);
+        $element->setNextElement($gateway);
 
         return $gateway;
     }

@@ -2,6 +2,7 @@
 
 namespace Gupalo\BpmnWorkflow\Gateway;
 
+use Gupalo\BpmnWorkflow\Bpmn\Exception\GatewayNotFoundException;
 use Gupalo\BpmnWorkflow\Bpmn\FlowElement\GatewayElement;
 use Gupalo\BpmnWorkflow\Context\Context;
 use Gupalo\BpmnWorkflow\Task\TaskGatewayNamingStrategyTrait;
@@ -22,8 +23,7 @@ class GatewayHandler
         $gateway = $this->gatewayContainer->getGateway($nameGateway);
 
         if (!$gateway instanceof GatewayInterface) {
-            // @todo handle error
-            throw  new \RuntimeException();
+            throw new GatewayNotFoundException($nameGateway);
         }
 
         return $gateway->execute($params, $context);

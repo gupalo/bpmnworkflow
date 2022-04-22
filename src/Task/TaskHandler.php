@@ -2,6 +2,7 @@
 
 namespace Gupalo\BpmnWorkflow\Task;
 
+use Gupalo\BpmnWorkflow\Bpmn\Exception\TaskNotFoundException;
 use Gupalo\BpmnWorkflow\Bpmn\FlowElement\TaskElement;
 use Gupalo\BpmnWorkflow\Context\Context;
 
@@ -21,8 +22,7 @@ class TaskHandler
         $task = $this->taskContainer->getTask($nameTask);
 
         if (!$task instanceof TaskInterface) {
-            // @todo handle error
-            throw  new \RuntimeException();
+            throw  new TaskNotFoundException($nameTask);
         }
 
         $task->execute($params, $context);

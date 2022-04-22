@@ -10,7 +10,7 @@ use Gupalo\BpmnWorkflow\Bpmn\FlowElement\ElementInterface;
 class BeginElementResolver implements ElementResolverInterface
 {
     #[Pure]
-    public function resolve(ElementInterface $ruleElement, BpmnElement $bpmnElement): ElementInterface
+    public function resolve(ElementInterface $element, BpmnElement $bpmnElement): ElementInterface
     {
         return new BeginElement();
     }

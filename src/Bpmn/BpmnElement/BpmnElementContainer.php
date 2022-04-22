@@ -2,7 +2,7 @@
 
 namespace Gupalo\BpmnWorkflow\Bpmn\BpmnElement;
 
-use RuntimeException;
+use Gupalo\BpmnWorkflow\Bpmn\Exception\BpmnElementNotFoundException;
 
 class BpmnElementContainer
 {
@@ -130,8 +130,7 @@ class BpmnElementContainer
                 return $element;
             }
         }
-        
-        // @todo
-        throw new RuntimeException();
+
+        throw new BpmnElementNotFoundException($uid);
     }
 }

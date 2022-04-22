@@ -7,5 +7,5 @@ use Gupalo\BpmnWorkflow\Bpmn\FlowElement\ElementInterface;
 
 interface ElementResolverInterface
 {
-    public function resolve (ElementInterface $ruleElement, BpmnElement $bpmnElement): ElementInterface;
+    public function resolve (ElementInterface $element, BpmnElement $bpmnElement): ElementInterface;
 }

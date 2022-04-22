@@ -10,7 +10,7 @@ use Gupalo\BpmnWorkflow\Bpmn\FlowElement\LinkElement;
 class LinkElementResolver implements ElementResolverInterface
 {
     #[Pure]
-    public function resolve(ElementInterface $ruleElement, BpmnElement $bpmnElement): ElementInterface
+    public function resolve(ElementInterface $element, BpmnElement $bpmnElement): ElementInterface
     {
         return new LinkElement($bpmnElement->getData());
     }
