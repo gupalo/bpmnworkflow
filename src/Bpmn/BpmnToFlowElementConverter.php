@@ -21,7 +21,7 @@ class BpmnToFlowElementConverter
         return $flow;
     }
 
-    private function load(string $content): SimpleXMLElement
+    public function load(string $content): SimpleXMLElement
     {
         return simplexml_load_string(
             $content,
