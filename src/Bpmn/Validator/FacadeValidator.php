@@ -2,25 +2,23 @@
 
 namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
-use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElementContainer;
-use Gupalo\BpmnWorkflow\Bpmn\Exception\Validation\CommonElementValidationException;
+use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbolContainer;
+use Gupalo\BpmnWorkflow\Exception\Validation\CommonSymbolValidationException;
 
 class FacadeValidator
 {
-    public function validate(BpmnElementContainer $bpmnElementContainer): void
+    public function validate(XmlSymbolContainer $container): void
     {
-        (new EndEventValidator())->validate($bpmnElementContainer->getEndEvents());
-        (new StartEventValidator())->validate($bpmnElementContainer->getStartEvents());
-        (new IntermediateThrowEventValidator())->validate($bpmnElementContainer->getIntermediateThrowEvents());
-        (new TaskValidator())->validate($bpmnElementContainer->getTasks());
-        (new SequenceFlowValidator())->validate($bpmnElementContainer->getsSquenceFlows());
-        (new ExclusiveGatewayValidator())->validate($bpmnElementContainer->getExclusiveGateways());
+        (new EndEventValidator())->validate($container->getEndEvents());
+        (new StartEventValidator())->validate($container->getStartEvents());
+        (new LinkThrowValidator())->validate($container->getLinkThrows());
+        (new TaskValidator())->validate($container->getTasks());
+        (new SequenceFlowValidator())->validate($container->getSequenceFlows());
+        (new ExclusiveGatewayValidator())->validate($container->getExclusiveGateways());
 
-        if (count(array_merge(
-            $bpmnElementContainer->getEndEvents(),
-            $bpmnElementContainer->getIntermediateThrowEvents()
-        )) === 0) {
-            throw new CommonElementValidationException('end or link element must be');
+        $endSymbols = array_merge($container->getEndEvents(), $container->getLinkThrows());
+        if (!$endSymbols) {
+            throw new CommonSymbolValidationException('end or link element must be');
         }
     }
 }

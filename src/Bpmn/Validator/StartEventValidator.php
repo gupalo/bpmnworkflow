@@ -2,7 +2,7 @@
 
 namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
-use Gupalo\BpmnWorkflow\Bpmn\Exception\Validation\StartEventValidationException;
+use Gupalo\BpmnWorkflow\Exception\Validation\StartEventValidationException;
 
 class StartEventValidator
 {

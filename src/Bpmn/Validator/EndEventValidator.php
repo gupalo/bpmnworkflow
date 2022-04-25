@@ -2,25 +2,25 @@
 
 namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
-use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
-use Gupalo\BpmnWorkflow\Bpmn\Exception\Validation\EndEventValidationException;
+use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
+use Gupalo\BpmnWorkflow\Exception\Validation\EndEventValidationException;
 
 class EndEventValidator
 {
     public function validate(array $endEvents): void
     {
         foreach ($endEvents as $endEvent) {
-            $this->validOne($endEvent);
+            $this->validateOne($endEvent);
         }
     }
 
-    private function validOne(BpmnElement $bpmnElement): void
+    private function validateOne(XmlSymbol $xmlSymbol): void
     {
-        if (count($bpmnElement->getOutgoingUids()) !== 0) {
+        if (count($xmlSymbol->getOutgoingUids()) !== 0) {
             throw new EndEventValidationException('Outgoings for end elements must be empty');
         }
 
-        if (!$bpmnElement->getIncomingUid()) {
+        if (!$xmlSymbol->getIncomingUids()) {
             throw new EndEventValidationException('Incoming for end elements must be');
         }
     }

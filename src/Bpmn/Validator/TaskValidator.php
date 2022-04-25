@@ -2,30 +2,30 @@
 
 namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
-use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
-use Gupalo\BpmnWorkflow\Bpmn\Exception\Validation\IntermediateThrowEventVlidationException;
-use Gupalo\BpmnWorkflow\Bpmn\Exception\Validation\TaskValidationException;
+use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
+use Gupalo\BpmnWorkflow\Exception\Validation\LinkThrowValidationException;
+use Gupalo\BpmnWorkflow\Exception\Validation\TaskValidationException;
 
 class TaskValidator
 {
     public function validate(array $tasks): void
     {
         foreach ($tasks as $task) {
-            $this->validOne($task);
+            $this->validateOne($task);
         }
     }
 
-    private function validOne(BpmnElement $bpmnElement): void
+    private function validateOne(XmlSymbol $xmlSymbol): void
     {
-        if (!$bpmnElement->getData()) {
-            throw new IntermediateThrowEventVlidationException('Name for task elements must be');
+        if (!$xmlSymbol->getData()) {
+            throw new LinkThrowValidationException('Name for task elements must be');
         }
 
-        if (count($bpmnElement->getOutgoingUids()) !== 1) {
+        if (count($xmlSymbol->getOutgoingUids()) !== 1) {
             throw new TaskValidationException('Outgoings for task elements must be only one');
         }
 
-        if (!$bpmnElement->getIncomingUid()) {
+        if (!$xmlSymbol->getIncomingUids()) {
             throw new TaskValidationException('Incoming must be');
         }
     }

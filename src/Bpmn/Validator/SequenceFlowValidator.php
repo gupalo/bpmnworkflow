@@ -2,25 +2,25 @@
 
 namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
-use Gupalo\BpmnWorkflow\Bpmn\BpmnElement\BpmnElement;
-use Gupalo\BpmnWorkflow\Bpmn\Exception\Validation\SequenceFlowValidationException;
+use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
+use Gupalo\BpmnWorkflow\Exception\Validation\SequenceFlowValidationException;
 
 class SequenceFlowValidator
 {
     public function validate(array $sequenceFlows): void
     {
         foreach ($sequenceFlows as $sequenceFlow) {
-            $this->validOne($sequenceFlow);
+            $this->validateOne($sequenceFlow);
         }
     }
 
-    private function validOne(BpmnElement $bpmnElement): void
+    private function validateOne(XmlSymbol $xmlSymbol): void
     {
-        if (!$bpmnElement->getTargetRefUid()) {
+        if (!$xmlSymbol->getTargetRefUid()) {
             throw new SequenceFlowValidationException('Target ref uid for transition elements must be');
         }
 
-        if (!$bpmnElement->getSourceRefUid()) {
+        if (!$xmlSymbol->getSourceRefUid()) {
             throw new SequenceFlowValidationException('Source ref uid for transition elements must be');
         }
     }
