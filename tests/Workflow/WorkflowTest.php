@@ -2,11 +2,11 @@
 
 namespace Gupalo\BpmnWorkflow\Tests\Workflow;
 
+use Gupalo\BpmnWorkflow\Bpmn\Loader\BpmnDirLoader;
 use Gupalo\BpmnWorkflow\Context\DataContext;
 use Gupalo\BpmnWorkflow\Extension\ExtensionHandler;
 use Gupalo\BpmnWorkflow\Process\Workflow;
 use Gupalo\BpmnWorkflow\Process\ProcessWalker;
-use Gupalo\BpmnWorkflow\Tests\BpmnDiagrams\TestBpmnDiagramLoader;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Comparison\EqValueComparison;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Comparison\LessValueComparison;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Comparison\MoreValueComparison;
@@ -34,9 +34,7 @@ class WorkflowTest extends TestCase
             new MoreValueComparison(),
         ]));
 
-        $this->workflow = new Workflow([
-            'cart_discount' => TestBpmnDiagramLoader::xmlString('cart_discount.bpmn'),
-        ], $walker);
+        $this->workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagrams')), $walker);
     }
 
     public function testWalkFlow(): void
@@ -48,10 +46,9 @@ class WorkflowTest extends TestCase
         );
         $context = new DataContext($cart);
 
-        $link = $this->workflow->walkOne('cart_discount', $context);
+        $this->workflow->walk('cart_discount', $context);
 
         self::assertEquals(360, $cart->getPrice());
-        self::assertNull($link);
     }
 
     public function testWalkFlow_BigPrice(): void

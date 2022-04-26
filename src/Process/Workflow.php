@@ -3,6 +3,7 @@
 namespace Gupalo\BpmnWorkflow\Process;
 
 use Gupalo\BpmnWorkflow\Bpmn\Converter\XmlToProcessConverter;
+use Gupalo\BpmnWorkflow\Bpmn\Loader\BpmnLoaderInterface;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
 use Gupalo\BpmnWorkflow\Context\DataContext;
 use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
@@ -15,12 +16,14 @@ class Workflow
     private array $items = [];
 
     /**
-     * @param array $processes [name => xml_string|Process]
+     * @param BpmnLoaderInterface $bpmnLoader
+     * @param ProcessWalker $walker
      */
     public function __construct(
-        array $processes,
+        BpmnLoaderInterface $bpmnLoader,
         private readonly ProcessWalker $walker
     ) {
+        $processes = $bpmnLoader->load();
         foreach ($processes as $name => $process) {
             if (is_string($process)) {
                 $process = (new XmlToProcessConverter())->process($process);
