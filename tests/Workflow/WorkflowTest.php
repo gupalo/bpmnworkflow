@@ -59,9 +59,8 @@ class WorkflowTest extends TestCase
             5000,
         );
         $context = new DataContext($cart);
-        $link = $this->workflow->walkOne('cart_discount', $context);
+        $this->workflow->walk('cart_discount', $context);
 
-        self::assertEquals(2500, $cart->getPrice());
-        self::assertEquals($link, 'flowBigPrice');
+        self::assertEquals(2000, $cart->getPrice());
     }
 }

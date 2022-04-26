@@ -14,7 +14,7 @@ class BpmnDirLoader implements BpmnLoaderInterface
         $files = scandir($this->dirPath);
         foreach ($files as $file) {
             if ($file !== '.' && $file !== '..' && strstr($file, $this->extension)) {
-                $result[explode('.', $file)[0]] = file_get_contents(ltrim($dirPath, '/') . '/' . $file);
+                $result[explode('.', $file)[0]] = file_get_contents(rtrim($this->dirPath, '/') . '/' . $file);
             }
         }
 
