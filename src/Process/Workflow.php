@@ -5,7 +5,7 @@ namespace Gupalo\BpmnWorkflow\Process;
 use Gupalo\BpmnWorkflow\Bpmn\Converter\XmlToProcessConverter;
 use Gupalo\BpmnWorkflow\Bpmn\Loader\BpmnLoaderInterface;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
-use Gupalo\BpmnWorkflow\Context\DataContext;
+use Gupalo\BpmnWorkflow\Context\ContextInterface;
 use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
 
 class Workflow
@@ -33,7 +33,7 @@ class Workflow
         }
     }
 
-    public function walk(string $name, DataContext $context, int $maxIterations = self::DEFAULT_MAX_ITERATIONS): void
+    public function walk(string $name, ContextInterface $context, int $maxIterations = self::DEFAULT_MAX_ITERATIONS): void
     {
         $nextProcess = $name;
         do {
@@ -41,7 +41,7 @@ class Workflow
         } while ($nextProcess !== null && --$maxIterations > 0);
     }
 
-    public function walkOne(string $nextProcess, DataContext $context): ?string
+    public function walkOne(string $nextProcess, ContextInterface $context): ?string
     {
         $process = $this->getProcessByName($nextProcess);
 
