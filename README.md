@@ -1,10 +1,10 @@
-BpmnWorkflow Bundle
+BpmnWorkflow
 ===================
 
 ## Install
 
 ```bash
-composer require gupalo/bpmnworkflow-bundle
+composer require gupalo/bpmnworkflow
 ```
 
 ## Example
