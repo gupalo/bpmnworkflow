@@ -23,16 +23,6 @@ class ExclusiveGatewayValidator
             throw new ExclusiveGatewayValidationException('Default transition for gateway must exist');
         }
 
-        if (!$bpmnElement->getData()) {
-            // TODO: VL: it's ok for gateway to be empty - it is used to combine several incoming to one outgoing
-            //throw new ExclusiveGatewayValidationException('Name for gateway elements must have');
-        }
-
-        if (count($bpmnElement->getOutgoingUids()) < 2) {
-            // TODO: VL: it's ok for gateway to have one outgoing - it is used to combine several incoming to one outgoing
-            //throw new ExclusiveGatewayValidationException('Outgoings for gateway element must be more 2');
-        }
-
         if (!$bpmnElement->getIncomingUids()) {
             throw new ExclusiveGatewayValidationException(sprintf(
                 'There should be at least one incoming for exclusive gateway "%s" (%s)', $bpmnElement->getData(), $bpmnElement->getUid()

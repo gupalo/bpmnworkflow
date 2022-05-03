@@ -1,8 +1,5 @@
 <?php
 
-/** @noinspection PhpMissingParamTypeInspection */
-/** @noinspection PhpMissingReturnTypeInspection */
-
 namespace Gupalo\BpmnWorkflow\Context;
 
 class DataContext implements ContextInterface

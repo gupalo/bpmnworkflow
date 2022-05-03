@@ -4,7 +4,7 @@ namespace Gupalo\BpmnWorkflow\Bpmn\Loader;
 
 class BpmnFileLoader implements BpmnLoaderInterface
 {
-    public function __construct(private string $filePath)
+    public function __construct(private readonly string $filePath)
     {
     }
 

@@ -8,7 +8,7 @@ use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\LinkThrow;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\StartEvent;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Gateway\ExclusiveGateway;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
-use Gupalo\BpmnWorkflow\Context\DataContext;
+use Gupalo\BpmnWorkflow\Context\ContextInterface;
 use Gupalo\BpmnWorkflow\Exception\Process\UnknownElementTypeException;
 use Gupalo\BpmnWorkflow\Extension\ExtensionHandler;
 
@@ -22,7 +22,7 @@ class ProcessWalker
     /**
      * @return string|null String if there is finished linking to another workflow
      */
-    public function walk(Process $process, DataContext $context): ?string
+    public function walk(Process $process, ContextInterface $context): ?string
     {
         $currentElement = $process->getNextSymbol();
         while ($currentElement) {
