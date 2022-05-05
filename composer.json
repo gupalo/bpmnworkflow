@@ -7,8 +7,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Gupalo\\BpmnWorkflow\\Tests\\": "tests/",
             "Gupalo\\BpmnWorkflow\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "prs-4": {
+            "Gupalo\\BpmnWorkflow\\Tests\\": "tests/"
         }
     },
     "require": {

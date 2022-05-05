@@ -45,6 +45,26 @@ Walker
 
 ## Test
 
+For test in main app need install require-dev dependency
+
 ```bash
-php bin/phpunit vendor/gupalo/bpmnworkflow
+composer require phpunit/phpunit --dev
 ```
+
+Add to composer.json autoload-dev section
+
+```json
+"autoload-dev": {
+    "psr-4": {
+        "Gupalo\\BpmmWorkflowBundle\\Tests\\": "vendor/gupalo/bpmnworkflow-bundle/tests/"
+    }
+}
+```
+
+Execute
+
+```bash
+composer dump-autoload
+php vendor/bin/phpunit vendor/gupalo/bpmnworkflow
+```
+
