@@ -56,7 +56,7 @@ Add to composer.json autoload-dev section
 ```json
 "autoload-dev": {
     "psr-4": {
-        "Gupalo\\BpmnWorkflow\\Tests\\": "vendor/gupalo/bpmnworkflow-bundle/tests/"
+        "Gupalo\\BpmnWorkflow\\Tests\\": "vendor/gupalo/bpmnworkflow/tests/"
     }
 }
 ```
