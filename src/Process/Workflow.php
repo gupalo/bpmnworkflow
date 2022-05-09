@@ -28,7 +28,7 @@ class Workflow
             if (is_string($process)) {
                 $processes = (new XmlToProcessConverter())->process($process);
                 foreach ($processes as $key => $processOne) {
-                    $this->items[$key === 'default' ? $name : $key] = $processOne;
+                    $this->items[$key === 0 ? $name : $key] = $processOne;
                 }
             } else {
                 $this->items[$name] = $process;

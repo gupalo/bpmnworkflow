@@ -5,6 +5,8 @@ namespace Gupalo\BpmnWorkflow\Bpmn\Converter;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
 use Gupalo\BpmnWorkflow\Bpmn\SymbolResolver\Resolver;
 use Gupalo\BpmnWorkflow\Bpmn\Validator\FacadeValidator;
+use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
+use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbolContainer;
 use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbolContainerBuilder;
 
 class XmlToProcessConverter
@@ -14,16 +16,19 @@ class XmlToProcessConverter
         $xml = (new XmlLoader())->load($content);
         $container = (new XmlSymbolContainerBuilder())->build($xml);
         (new FacadeValidator())->validate($container);
-        $processes = [];
-        $process = new Process();
-        (new Resolver($container))->resolve($process, $container->getFirstStartEvent());
-        $processes['default'] = $process;
+        $processes = [$this->getProcess($container, $container->getFirstStartEvent())];
         foreach ($container->getLinkCatch() as $linkCatch) {
-            $process = new Process();
-            (new Resolver($container))->resolve($process, $linkCatch);    
-            $processes[$linkCatch->getData()] = $process;
+            $processes[$linkCatch->getData()] = $this->getProcess($container, $linkCatch);
         }
 
         return $processes;
+    }
+    
+    private function getProcess(XmlSymbolContainer $container, XmlSymbol $start): Process
+    {
+        $process = new Process();
+        (new Resolver($container))->resolve($process, $start);
+        
+        return $process;
     }
 }
