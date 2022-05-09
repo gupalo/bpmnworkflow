@@ -18,11 +18,11 @@ use PHPUnit\Framework\TestCase;
 
 class WorkflowTest extends TestCase
 {
-    private Workflow $workflow;
+    private ProcessWalker $walker;
 
     protected function setUp(): void
     {
-        $walker = new ProcessWalker(new ExtensionHandler([
+        $this->walker = new ProcessWalker(new ExtensionHandler([
             new DiscountProcedure(),
             new WithoutDiscountProcedure(),
 
@@ -33,12 +33,11 @@ class WorkflowTest extends TestCase
             new LessValueComparison(),
             new MoreValueComparison(),
         ]));
-
-        $this->workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagrams')), $walker);
     }
 
     public function testWalkFlow(): void
     {
+        $workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagrams')), $this->walker);
         $cart = new Example\Cart\Cart(
             items: ['name' => 'cola', 'price' => 800],
             locale: 'en',
@@ -46,21 +45,36 @@ class WorkflowTest extends TestCase
         );
         $context = new DataContext($cart);
 
-        $this->workflow->walk('cart_discount', $context);
+        $workflow->walk('cart_discount', $context);
 
         self::assertEquals(360, $cart->getPrice());
     }
 
     public function testWalkFlow_BigPrice(): void
     {
+        $workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagrams')), $this->walker);
         $cart = new Example\Cart\Cart(
             ['name' => 'cola', 'price' => 5000],
             'en',
             5000,
         );
         $context = new DataContext($cart);
-        $this->workflow->walk('cart_discount', $context);
+        $workflow->walk('cart_discount', $context);
 
         self::assertEquals(2000, $cart->getPrice());
+    }
+
+    public function testWalkFlow_BigPriceGoTo(): void
+    {
+        $workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagramsGoto')), $this->walker);
+        $cart = new Example\Cart\Cart(
+            ['name' => 'cola', 'price' => 5000],
+            'en',
+            5000,
+        );
+        $context = new DataContext($cart);
+        $workflow->walk('goto', $context);
+
+        self::assertEquals(1250, $cart->getPrice());
     }
 }

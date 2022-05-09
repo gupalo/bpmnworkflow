@@ -5,7 +5,7 @@ namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
 use Gupalo\BpmnWorkflow\Exception\Validation\LinkThrowValidationException;
 
-class LinkThrowValidator
+class LinkCatchValidator
 {
     public function validate(array $linkThrows): void
     {
@@ -17,15 +17,15 @@ class LinkThrowValidator
     private function validateOne(XmlSymbol $xmlSymbol): void
     {
         if (!$xmlSymbol->getData()) {
-            throw new LinkThrowValidationException('Name for link throw elements must be');
+            throw new LinkThrowValidationException('Name for link catch elements must be');
         }
 
-        if ($xmlSymbol->getOutgoingUids()) {
-            throw new LinkThrowValidationException('Outgoings for link throw elements must be empty');
+        if (!$xmlSymbol->getOutgoingUids()) {
+            throw new LinkThrowValidationException('Outgoings for link catch elements must be');
         }
 
-        if (!$xmlSymbol->getIncomingUids()) {
-            throw new LinkThrowValidationException('Incoming for link throw elements must be');
+        if ($xmlSymbol->getIncomingUids()) {
+            throw new LinkThrowValidationException('Incoming for link elements must be empty');
         }
     }
 }

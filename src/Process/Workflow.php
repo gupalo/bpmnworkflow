@@ -23,13 +23,16 @@ class Workflow
         BpmnLoaderInterface $bpmnLoader,
         private readonly ProcessWalker $walker
     ) {
-        $processes = $bpmnLoader->load();
-        foreach ($processes as $name => $process) {
+        $processesLoaded = $bpmnLoader->load();
+        foreach ($processesLoaded as $name => $process) {
             if (is_string($process)) {
-                $process = (new XmlToProcessConverter())->process($process);
+                $processes = (new XmlToProcessConverter())->process($process);
+                foreach ($processes as $key => $processOne) {
+                    $this->items[$key === 'default' ? $name : $key] = $processOne;
+                }
+            } else {
+                $this->items[$name] = $process;
             }
-
-            $this->items[$name] = $process;
         }
     }
 

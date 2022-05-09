@@ -12,6 +12,7 @@ class FacadeValidator
         (new EndEventValidator())->validate($container->getEndEvents());
         (new StartEventValidator())->validate($container->getStartEvents());
         (new LinkThrowValidator())->validate($container->getLinkThrows());
+        (new LinkCatchValidator())->validate($container->getLinkCatch());
         (new TaskValidator())->validate($container->getTasks());
         (new SequenceFlowValidator())->validate($container->getSequenceFlows());
         (new ExclusiveGatewayValidator())->validate($container->getExclusiveGateways());

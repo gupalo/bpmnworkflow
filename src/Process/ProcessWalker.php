@@ -4,6 +4,7 @@ namespace Gupalo\BpmnWorkflow\Process;
 
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Activity\Task;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\EndEvent;
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\LinkCatch;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\LinkThrow;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\StartEvent;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Gateway\ExclusiveGateway;
@@ -27,6 +28,8 @@ class ProcessWalker
         $currentElement = $process->getNextSymbol();
         while ($currentElement) {
             if ($currentElement instanceof StartEvent) {
+                $currentElement = $currentElement->getNextSymbol();
+            } if ($currentElement instanceof LinkCatch) {
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof Task) {
                 $this->handler->executeProcedure($currentElement, $context);

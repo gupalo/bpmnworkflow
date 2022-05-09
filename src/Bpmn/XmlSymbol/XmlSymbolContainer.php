@@ -105,6 +105,11 @@ class XmlSymbolContainer
         return $this->getXmlSymbolsByType(XmlSymbolType::LINK_THROW_TYPE);
     }
 
+    public function getLinkCatch(): array
+    {
+        return $this->getXmlSymbolsByType(XmlSymbolType::LINK_CATCH_TYPE);
+    }
+
     public function getSequenceFlows(): array
     {
         return $this->getXmlSymbolsByType(XmlSymbolType::SEQUENCE_FLOW_TYPE);
