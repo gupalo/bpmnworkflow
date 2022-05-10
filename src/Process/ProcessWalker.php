@@ -2,6 +2,7 @@
 
 namespace Gupalo\BpmnWorkflow\Process;
 
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\Activity\CallActivity;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Activity\Task;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\EndEvent;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\LinkCatch;
@@ -11,10 +12,13 @@ use Gupalo\BpmnWorkflow\Bpmn\Symbol\Gateway\ExclusiveGateway;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
 use Gupalo\BpmnWorkflow\Context\ContextInterface;
 use Gupalo\BpmnWorkflow\Exception\Process\UnknownElementTypeException;
+use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
 use Gupalo\BpmnWorkflow\Extension\ExtensionHandler;
 
 class ProcessWalker
 {
+    private array $allProcess = [];
+
     public function __construct(
         private readonly ExtensionHandler $handler,
     ) {
@@ -29,7 +33,11 @@ class ProcessWalker
         while ($currentElement) {
             if ($currentElement instanceof StartEvent) {
                 $currentElement = $currentElement->getNextSymbol();
-            } if ($currentElement instanceof LinkCatch) {
+            } elseif ($currentElement instanceof LinkCatch) {
+                $currentElement = $currentElement->getNextSymbol();
+            } elseif ($currentElement instanceof CallActivity) {
+                $subProcess = $this->getProcess($currentElement->getName());
+                $this->walk($subProcess, $context);
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof Task) {
                 $this->handler->executeProcedure($currentElement, $context);
@@ -54,5 +62,19 @@ class ProcessWalker
         }
 
         return null;
+    }
+    
+    public function getProcess(string $name): Process
+    {
+        if (!isset($this->allProcess[$name])) {
+            throw new ProcessNotFoundException($name);    
+        }
+        
+        return $this->allProcess[$name];
+    }
+
+    public function setAllProcess(array $allProcess): void
+    {
+        $this->allProcess = $allProcess;
     }
 }

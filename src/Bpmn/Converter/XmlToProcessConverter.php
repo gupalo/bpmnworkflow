@@ -17,7 +17,7 @@ class XmlToProcessConverter
         $container = (new XmlSymbolContainerBuilder())->build($xml);
         (new FacadeValidator())->validate($container);
         $processes = [$this->getProcess($container, $container->getFirstStartEvent())];
-        foreach ($container->getLinkCatch() as $linkCatch) {
+        foreach ($container->getLinksCatch() as $linkCatch) {
             $processes[$linkCatch->getData()] = $this->getProcess($container, $linkCatch);
         }
 

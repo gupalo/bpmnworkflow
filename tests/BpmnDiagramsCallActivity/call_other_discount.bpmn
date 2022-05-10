@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="sample-diagram" targetNamespace="http://bpmn.io/schema/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="Process_1" isExecutable="false">
+    <bpmn2:startEvent id="Event_0xcse7y">
+      <bpmn2:outgoing>Flow_0xe0a2r</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:task id="Activity_0b44xt8" name="discount(50)">
+      <bpmn2:incoming>Flow_0xe0a2r</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1rjcvq7</bpmn2:outgoing>
+    </bpmn2:task>
+    <bpmn2:endEvent id="Event_1d6xyn3">
+      <bpmn2:incoming>Flow_1rjcvq7</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="Flow_0xe0a2r" sourceRef="Event_0xcse7y" targetRef="Activity_0b44xt8" />
+    <bpmn2:sequenceFlow id="Flow_1rjcvq7" sourceRef="Activity_0b44xt8" targetRef="Event_1d6xyn3" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_0xe0a2r_di" bpmnElement="Flow_0xe0a2r">
+        <di:waypoint x="198" y="300" />
+        <di:waypoint x="300" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rjcvq7_di" bpmnElement="Flow_1rjcvq7">
+        <di:waypoint x="400" y="300" />
+        <di:waypoint x="482" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0xcse7y_di" bpmnElement="Event_0xcse7y">
+        <dc:Bounds x="162" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0b44xt8_di" bpmnElement="Activity_0b44xt8">
+        <dc:Bounds x="300" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1d6xyn3_di" bpmnElement="Event_1d6xyn3">
+        <dc:Bounds x="482" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

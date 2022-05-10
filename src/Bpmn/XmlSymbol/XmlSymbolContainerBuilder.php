@@ -30,6 +30,7 @@ class XmlSymbolContainerBuilder
     private function getXmlSymbol(SimpleXMLElement $xmlElement): XmlSymbol
     {
         $attributes = $xmlElement->attributes() ?? new SimpleXMLElement('');
+        $this->getDefinition($xmlElement);
 
         return new XmlSymbol(
             type: $xmlElement->getName(),
@@ -40,7 +41,19 @@ class XmlSymbolContainerBuilder
             defaultUid: (string)$attributes->default,
             outgoingUids: $this->getUids($xmlElement->outgoing ?? null),
             incoimngUids: $this->getUids($xmlElement->incoming ?? null),
+            definition: $this->getDefinition($xmlElement)
         );
+    }
+    
+    private function getDefinition(SimpleXMLElement $xmlElement): ?string
+    {
+        foreach ($xmlElement as $name => $child) {
+            if (strstr(strtolower($name), 'definition')) {
+                return $name;
+            }
+        }
+        
+        return null;
     }
 
     /**

@@ -3,9 +3,9 @@
 namespace Gupalo\BpmnWorkflow\Bpmn\Validator;
 
 use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
-use Gupalo\BpmnWorkflow\Exception\Validation\TaskValidationException;
+use Gupalo\BpmnWorkflow\Exception\Validation\CallActivityValidationException;
 
-class TaskValidator
+class CallActitityValidator
 {
     public function validate(array $tasks): void
     {
@@ -17,15 +17,15 @@ class TaskValidator
     private function validateOne(XmlSymbol $xmlSymbol): void
     {
         if (!$xmlSymbol->getData()) {
-            throw new TaskValidationException('Name for task elements must be');
+            throw new CallActivityValidationException('Name for call activity elements must be');
         }
 
         if (count($xmlSymbol->getOutgoingUids()) !== 1) {
-            throw new TaskValidationException('Outgoings for task elements must be only one');
+            throw new TaskValidationException('Outgoings for call activity elements must be only one');
         }
 
         if (!$xmlSymbol->getIncomingUids()) {
-            throw new TaskValidationException('Incoming for task must be');
+            throw new TaskValidationException('Incoming for call activity must be');
         }
     }
 }

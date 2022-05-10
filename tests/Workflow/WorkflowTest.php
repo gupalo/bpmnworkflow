@@ -77,4 +77,18 @@ class WorkflowTest extends TestCase
 
         self::assertEquals(1250, $cart->getPrice());
     }
+
+    public function testWalkFlow_BigPriceCallActivity(): void
+    {
+        $workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagramsCallActivity')), $this->walker);
+        $cart = new Example\Cart\Cart(
+            ['name' => 'cola', 'price' => 5000],
+            'en',
+            5000,
+        );
+        $context = new DataContext($cart);
+        $workflow->walk('call_activity', $context);
+
+        self::assertEquals(1125, $cart->getPrice());
+    }
 }

@@ -34,6 +34,8 @@ class Workflow
                 $this->items[$name] = $process;
             }
         }
+        
+        $this->walker->setAllProcess($this->items);
     }
 
     public function walk(string $name, ContextInterface $context, int $maxIterations = self::DEFAULT_MAX_ITERATIONS): void

@@ -13,6 +13,7 @@ class XmlSymbol
         private readonly string $defaultUid,
         /** @var string[] */ private readonly array $outgoingUids,
         /** @var string[] */ private readonly array $incoimngUids,
+        private readonly ?string $definition = null,
     ) {
     }
 
@@ -61,5 +62,10 @@ class XmlSymbol
     public function getOutgoingUids(): array
     {
         return $this->outgoingUids;
+    }
+    
+    public function getDefinition(): ?string
+    {
+        return $this->definition;
     }
 }
