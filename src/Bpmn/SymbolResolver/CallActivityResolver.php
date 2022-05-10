@@ -3,7 +3,6 @@
 namespace Gupalo\BpmnWorkflow\Bpmn\SymbolResolver;
 
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Activity\CallActivity;
-use Gupalo\BpmnWorkflow\Bpmn\Symbol\Activity\Task;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\SymbolInterface;
 use Gupalo\BpmnWorkflow\Bpmn\XmlSymbol\XmlSymbol;
 use JetBrains\PhpStorm\Pure;
