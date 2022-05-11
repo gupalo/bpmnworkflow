@@ -4,7 +4,9 @@ namespace Gupalo\BpmnWorkflow\Process;
 
 use Gupalo\BpmnWorkflow\Bpmn\Converter\XmlToProcessConverter;
 use Gupalo\BpmnWorkflow\Bpmn\Loader\BpmnLoaderInterface;
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
 use Gupalo\BpmnWorkflow\Context\ContextInterface;
+use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
 
 class Workflow
 {
@@ -32,7 +34,7 @@ class Workflow
                 $this->items[$name] = $process;
             }
         }
-
+        
         $this->walker->setAllProcess($this->items);
     }
 

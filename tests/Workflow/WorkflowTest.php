@@ -103,6 +103,6 @@ class WorkflowTest extends TestCase
         $context = new DataContext($cart);
         $workflow->walk('call_activity', $context);
 
-        self::assertEquals(2500, $cart->getPrice());
+        self::assertEquals(2250, $cart->getPrice());
     }
 }
