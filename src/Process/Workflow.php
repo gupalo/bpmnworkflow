@@ -38,28 +38,8 @@ class Workflow
         $this->walker->setAllProcess($this->items);
     }
 
-    public function walk(string $name, ContextInterface $context, int $maxIterations = self::DEFAULT_MAX_ITERATIONS): void
+    public function walk(string $name, ContextInterface $context): void
     {
-        $nextProcess = $name;
-        do {
-            $nextProcess = $this->walkOne($nextProcess, $context);
-        } while ($nextProcess !== null && --$maxIterations > 0);
-    }
-
-    public function walkOne(string $nextProcess, ContextInterface $context): ?string
-    {
-        $process = $this->getProcessByName($nextProcess);
-
-        return $this->walker->walk($process, $context);
-    }
-
-    private function getProcessByName(string $name): Process
-    {
-        $process = $this->items[$name] ?? null;
-        if ($process === null) {
-            throw new ProcessNotFoundException($name);
-        }
-
-        return $process;
+        $this->walker->walk($name, $context);
     }
 }

@@ -27,8 +27,9 @@ class ProcessWalker
     /**
      * @return string|null String if there is finished linking to another workflow
      */
-    public function walk(Process $process, ContextInterface $context): ?string
+    public function walk(string $processName, ContextInterface $context): ?EndEvent
     {
+        $process = $this->getProcess($processName);
         $currentElement = $process->getNextSymbol();
         while ($currentElement) {
             if ($currentElement instanceof StartEvent) {
@@ -36,8 +37,11 @@ class ProcessWalker
             } elseif ($currentElement instanceof LinkCatch) {
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof CallActivity) {
-                $subProcess = $this->getProcess($currentElement->getName());
-                $this->walk($subProcess, $context);
+                $end = $this->walk($currentElement->getName(), $context);
+                
+                if ($end instanceof EndEvent && $end->isDie()) {
+                    return null;
+                }
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof Task) {
                 $this->handler->executeProcedure($currentElement, $context);
@@ -53,9 +57,11 @@ class ProcessWalker
                     }
                 }
             } elseif ($currentElement instanceof LinkThrow) {
-                return $currentElement->getName();
-            } elseif ($currentElement instanceof EndEvent) {
+                $this->walk($currentElement->getName(), $context);
+                
                 return null;
+            } elseif ($currentElement instanceof EndEvent) {
+                return $currentElement;
             } else {
                 throw new UnknownElementTypeException(get_class($currentElement));
             }
