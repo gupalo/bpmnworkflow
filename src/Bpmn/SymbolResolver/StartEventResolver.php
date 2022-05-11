@@ -12,6 +12,6 @@ class StartEventResolver implements SymbolResolverInterface
     #[Pure]
     public function resolve(SymbolInterface $symbol, XmlSymbol $xmlSymbol): SymbolInterface
     {
-        return new StartEvent();
+        return (new StartEvent())->setUid($xmlSymbol->getUid());
     }
 }

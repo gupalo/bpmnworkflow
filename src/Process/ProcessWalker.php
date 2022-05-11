@@ -11,13 +11,19 @@ use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\StartEvent;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Gateway\ExclusiveGateway;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
 use Gupalo\BpmnWorkflow\Context\ContextInterface;
+use Gupalo\BpmnWorkflow\Exception\MaxExecutionCountException;
 use Gupalo\BpmnWorkflow\Exception\Process\UnknownElementTypeException;
 use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
 use Gupalo\BpmnWorkflow\Extension\ExtensionHandler;
+use Gupalo\BpmnWorkflow\Trace\Tracer;
 
 class ProcessWalker
 {
+    private const MAX_PROCESS_EXECUTE = 100;
+
     private array $allProcess = [];
+
+    private static int $countProcess = 0;
 
     public function __construct(
         private readonly ExtensionHandler $handler,
@@ -25,20 +31,30 @@ class ProcessWalker
     }
 
     /**
-     * @return string|null String if there is finished linking to another workflow
+     * @param string $processName
+     * @param ContextInterface $context
+     * @return EndEvent|null
+     * @throws ProcessNotFoundException
+     * @throws UnknownElementTypeException
+     * @throws MaxExecutionCountException
      */
-    public function walk(string $processName, ContextInterface $context): ?EndEvent
+    public function walk(string $processName, ContextInterface $context, Tracer $tracer): ?EndEvent
     {
+        self::$countProcess++;
+        if (self::$countProcess > self::MAX_PROCESS_EXECUTE) {
+            throw new MaxExecutionCountException();
+        }
         $process = $this->getProcess($processName);
         $currentElement = $process->getNextSymbol();
         while ($currentElement) {
+            $tracer->addUidForProcess($processName, $currentElement->getUid());
             if ($currentElement instanceof StartEvent) {
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof LinkCatch) {
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof CallActivity) {
-                $end = $this->walk($currentElement->getName(), $context);
-                
+                $end = $this->walk($currentElement->getName(), $context, $tracer);
+
                 if ($end instanceof EndEvent && $end->isDie()) {
                     return null;
                 }
@@ -57,8 +73,8 @@ class ProcessWalker
                     }
                 }
             } elseif ($currentElement instanceof LinkThrow) {
-                $this->walk($currentElement->getName(), $context);
-                
+                $this->walk($currentElement->getName(), $context, $tracer);
+
                 return null;
             } elseif ($currentElement instanceof EndEvent) {
                 return $currentElement;
@@ -69,13 +85,13 @@ class ProcessWalker
 
         return null;
     }
-    
+
     public function getProcess(string $name): Process
     {
         if (!isset($this->allProcess[$name])) {
-            throw new ProcessNotFoundException($name);    
+            throw new ProcessNotFoundException($name);
         }
-        
+
         return $this->allProcess[$name];
     }
 

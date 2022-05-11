@@ -4,10 +4,14 @@ namespace Gupalo\BpmnWorkflow\Bpmn\Symbol\Gateway;
 
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Flow\SequenceFlow;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\SymbolInterface;
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\UuidAwareInterface;
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\UuidTrait;
 use JetBrains\PhpStorm\Pure;
 
-class ExclusiveGateway implements SymbolInterface
+class ExclusiveGateway implements SymbolInterface, UuidAwareInterface
 {
+    use UuidTrait;
+
     /** @var array|SequenceFlow[] */
     private array $flows = [];
 

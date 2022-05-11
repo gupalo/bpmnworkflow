@@ -29,6 +29,7 @@ class ExclusiveGatewayResolver implements SymbolResolverInterface
             $isDefault = ($xmlSymbol->getDefaultUid() === $outgoing);
 
             $flow = new SequenceFlow($isDefault, $outgoingXmlSymbol->getData());
+            $flow->setUid($outgoingXmlSymbol->getUid());
             $flows[] = $flow;
 
             $nextXmlSymbol = $this->container->getXmlSymbolByUid($outgoingXmlSymbol->getTargetRefUid());
@@ -37,6 +38,7 @@ class ExclusiveGatewayResolver implements SymbolResolverInterface
         }
 
         $gateway->setFlows($flows);
+        $gateway->setUid($xmlSymbol->getUid());
         $symbol->setNextSymbol($gateway);
 
         return $gateway;

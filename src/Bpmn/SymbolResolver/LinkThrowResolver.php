@@ -12,6 +12,6 @@ class LinkThrowResolver implements SymbolResolverInterface
     #[Pure]
     public function resolve(SymbolInterface $symbol, XmlSymbol $xmlSymbol): SymbolInterface
     {
-        return new LinkThrow($xmlSymbol->getData());
+        return (new LinkThrow($xmlSymbol->getData()))->setUid($xmlSymbol->getUid());
     }
 }
