@@ -5,7 +5,7 @@ namespace Gupalo\BpmnWorkflow\Exception;
 use Exception;
 use JetBrains\PhpStorm\Pure;
 
-class MaxExecutionCountException extends Exception
+class ProcessMaxExecutionCountException extends Exception
 {
     private const MESSAGE_TEMPLATE = 'Max execution count process';
 

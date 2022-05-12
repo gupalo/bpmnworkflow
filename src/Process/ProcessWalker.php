@@ -11,7 +11,7 @@ use Gupalo\BpmnWorkflow\Bpmn\Symbol\Event\StartEvent;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Gateway\ExclusiveGateway;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\Process\Process;
 use Gupalo\BpmnWorkflow\Context\ContextInterface;
-use Gupalo\BpmnWorkflow\Exception\MaxExecutionCountException;
+use Gupalo\BpmnWorkflow\Exception\ProcessMaxExecutionCountException;
 use Gupalo\BpmnWorkflow\Exception\Process\UnknownElementTypeException;
 use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
 use Gupalo\BpmnWorkflow\Extension\ExtensionHandler;
@@ -37,13 +37,13 @@ class ProcessWalker
      * @return EndEvent|null
      * @throws ProcessNotFoundException
      * @throws UnknownElementTypeException
-     * @throws MaxExecutionCountException
+     * @throws ProcessMaxExecutionCountException
      */
     public function walk(string $processName, ContextInterface $context, ?Tracer $tracer = null): ?EndEvent
     {
         self::$countProcess++;
         if (self::$countProcess > self::MAX_PROCESS_EXECUTE) {
-            throw new MaxExecutionCountException();
+            throw new ProcessMaxExecutionCountException();
         }
         $process = $this->getProcess($processName);
         $currentElement = $process->getNextSymbol();
