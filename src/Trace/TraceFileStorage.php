@@ -42,7 +42,8 @@ class TraceFileStorage implements TraceStorageInterface
                 if ($dateEnd && $dateEnd < $dateFile) {
                     continue;
                 }
-                $traces[] = unserialize(file_get_contents($this->dirPath . $file));
+                $traces[str_replace('.' . self::TRACE_FILE_EXTENSION, '', $file)] =
+                    unserialize(file_get_contents($this->dirPath . $file));
             }
         }
 

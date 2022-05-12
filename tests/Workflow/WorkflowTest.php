@@ -109,7 +109,7 @@ class WorkflowTest extends TestCase
         );
         $context = new DataContext($cart);
         $workflow->walk('call_activity', $context);
-        $traces = $traceStorage->getTrace(new \DateTime('2022-05-11'), new \DateTime('2022-05-15'));
+        $traces = $traceStorage->getTrace();
 
         self::assertEquals(2250, $cart->getPrice());
         self::assertGreaterThan(0, count($traces));
