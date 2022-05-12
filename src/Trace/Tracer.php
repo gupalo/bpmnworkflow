@@ -6,7 +6,7 @@ class Tracer
 {
     private array $uidsByProcess = [];
 
-    public function __construct(private array $process)
+    public function __construct()
     {
     }
 
@@ -15,18 +15,8 @@ class Tracer
         $this->uidsByProcess[$nameProcess][] = $uid;
     }
 
-    public function getTrace(): array
+    public function getUidsIndexedProcess(): array
     {
-        $trace = [];
-        foreach ($this->process as $name => $xml) {
-            if (is_string($xml)) {
-                $trace[$name] = [
-                    'xml' => $xml,
-                    'uids' => $this->uidsByProcess[$name]
-                ];
-            }
-        }
-
-        return $trace;
+        return $this->uidsByProcess;
     }
 }

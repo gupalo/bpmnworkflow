@@ -33,12 +33,13 @@ class ProcessWalker
     /**
      * @param string $processName
      * @param ContextInterface $context
+     * @param Tracer|null $tracer
      * @return EndEvent|null
      * @throws ProcessNotFoundException
      * @throws UnknownElementTypeException
      * @throws MaxExecutionCountException
      */
-    public function walk(string $processName, ContextInterface $context, Tracer $tracer): ?EndEvent
+    public function walk(string $processName, ContextInterface $context, ?Tracer $tracer = null): ?EndEvent
     {
         self::$countProcess++;
         if (self::$countProcess > self::MAX_PROCESS_EXECUTE) {
@@ -47,7 +48,9 @@ class ProcessWalker
         $process = $this->getProcess($processName);
         $currentElement = $process->getNextSymbol();
         while ($currentElement) {
-            $tracer->addUidForProcess($processName, $currentElement->getUid());
+            if ($tracer instanceof Tracer) {
+                $tracer->addUidForProcess($processName, $currentElement->getUid());
+            }
             if ($currentElement instanceof StartEvent) {
                 $currentElement = $currentElement->getNextSymbol();
             } elseif ($currentElement instanceof LinkCatch) {

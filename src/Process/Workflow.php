@@ -9,22 +9,28 @@ use Gupalo\BpmnWorkflow\Exception\MaxExecutionCountException;
 use Gupalo\BpmnWorkflow\Exception\ProcessNotFoundException;
 use Gupalo\BpmnWorkflow\Exception\Process\UnknownElementTypeException;
 use Gupalo\BpmnWorkflow\Trace\Tracer;
+use Gupalo\BpmnWorkflow\Trace\TraceWriterInterface;
 
 class Workflow
 {
     /** @var array [name => Process] */
     private array $items = [];
 
-    private Tracer $tracer;
+    private ?TraceWriterInterface $traceWriter;
 
     /**
      * @param BpmnLoaderInterface $bpmnLoader
      * @param ProcessWalker $walker
+     * @param bool $saveTrace
+     * @param TraceWriterInterface|null $traceWriter
      */
     public function __construct(
         BpmnLoaderInterface $bpmnLoader,
-        private readonly ProcessWalker $walker
+        private readonly ProcessWalker $walker,
+        private readonly bool $saveTrace = false,
+        ?TraceWriterInterface $traceWriter = null
     ) {
+        $this->traceWriter = $traceWriter;
         $processesLoaded = $bpmnLoader->load();
         foreach ($processesLoaded as $name => $process) {
             if (is_string($process)) {
@@ -37,7 +43,6 @@ class Workflow
             }
         }
 
-        $this->tracer = new Tracer($processesLoaded);
         $this->walker->setAllProcess($this->items);
     }
 
@@ -51,11 +56,10 @@ class Workflow
      */
     public function walk(string $name, ContextInterface $context): void
     {
-        $this->walker->walk($name, $context, $this->tracer);
-    }
-
-    public function getTracer(): Tracer
-    {
-        return $this->tracer;
+        $tracer = $this->saveTrace ? new Tracer() : null;
+        $this->walker->walk($name, $context, $tracer);
+        if ($this->saveTrace && $this->traceWriter instanceof TraceWriterInterface) {
+            $this->traceWriter->write($tracer, $context);
+        }
     }
 }
