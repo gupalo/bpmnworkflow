@@ -10,10 +10,14 @@ class TraceFileWriter implements TraceWriterInterface
     {
     }
 
-    public function write(Tracer $tracer, ContextInterface $context): void
+    public function write(Tracer $tracer, ContextInterface $contextBefore, ContextInterface $contextAfter): void
     {
         $filename = microtime(true);
-        $data = ['trace' => $tracer->getUidsIndexedProcess(), 'context' => $context];
-        file_put_contents(rtrim($this->dirPath, '/') . '/' . $filename, json_encode($data));
+        $data = [
+            'trace' => $tracer->getUidsIndexedProcess(),
+            'contextBefore' => $contextBefore->getData(),
+            'contextAfter' => $contextAfter->getData()
+        ];
+        file_put_contents(rtrim($this->dirPath, '/') . '/' . $filename, serialize($data));
     }
 }

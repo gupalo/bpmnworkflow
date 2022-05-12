@@ -6,5 +6,5 @@ use Gupalo\BpmnWorkflow\Context\ContextInterface;
 
 interface TraceWriterInterface
 {
-    public function write(Tracer $tracer, ContextInterface $context): void;
+    public function write(Tracer $tracer, ContextInterface $contextBefore, ContextInterface $contextAfter): void;
 }

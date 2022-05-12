@@ -14,6 +14,7 @@ use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Functions\LocaleFuncti
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Functions\PriceFunction;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Procedure\DiscountProcedure;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Procedure\WithoutDiscountProcedure;
+use Gupalo\BpmnWorkflow\Trace\TraceFileWriter;
 use PHPUnit\Framework\TestCase;
 
 class WorkflowTest extends TestCase
@@ -92,9 +93,15 @@ class WorkflowTest extends TestCase
         self::assertEquals(1125, $cart->getPrice());
     }
 
-    public function testWalkFlow_BigPriceCallActivityDie(): void
+    public function testWalkFlow_BigPriceCallActivityDieWithSaveTrace(): void
     {
-        $workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagramsCallActivityDie')), $this->walker);
+        $traceWriter = new TraceFileWriter(__DIR__ . '/../traces');
+        $workflow = new Workflow(
+            (new BpmnDirLoader(__DIR__ . '/../BpmnDiagramsCallActivityDie')),
+            $this->walker,
+            true,
+            $traceWriter
+        );
         $cart = new Example\Cart\Cart(
             ['name' => 'cola', 'price' => 5000],
             'en',

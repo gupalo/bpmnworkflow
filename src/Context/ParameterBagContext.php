@@ -10,6 +10,11 @@ class ParameterBagContext implements ContextInterface
         private array $items = [],
     ) {
     }
+    
+    public function getData()
+    {
+        return $this->items;
+    }
 
     public function get(string $key): mixed
     {
