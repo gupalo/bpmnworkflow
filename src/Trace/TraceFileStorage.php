@@ -11,6 +11,10 @@ class TraceFileStorage implements TraceStorageInterface
     public function __construct(private string $dirPath)
     {
         $this->dirPath = rtrim($this->dirPath, '/') . '/';
+
+        if (!file_exists($this->dirPath)) {
+            mkdir($this->dirPath, 0777, true);
+        }
     }
 
     public function write(Tracer $tracer, ContextInterface $contextBefore, ContextInterface $contextAfter): void
