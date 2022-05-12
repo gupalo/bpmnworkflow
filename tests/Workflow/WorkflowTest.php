@@ -14,6 +14,7 @@ use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Functions\LocaleFuncti
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Functions\PriceFunction;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Procedure\DiscountProcedure;
 use Gupalo\BpmnWorkflow\Tests\Workflow\Example\Extensions\Procedure\WithoutDiscountProcedure;
+use Gupalo\BpmnWorkflow\Trace\TraceFileStorage;
 use PHPUnit\Framework\TestCase;
 
 class WorkflowTest extends TestCase
@@ -92,9 +93,15 @@ class WorkflowTest extends TestCase
         self::assertEquals(1125, $cart->getPrice());
     }
 
-    public function testWalkFlow_BigPriceCallActivityDie(): void
+    public function testWalkFlow_BigPriceCallActivityDieWithSaveTrace(): void
     {
-        $workflow = new Workflow((new BpmnDirLoader(__DIR__ . '/../BpmnDiagramsCallActivityDie')), $this->walker);
+        $traceStorage = new TraceFileStorage(__DIR__ . '/../traces');
+        $workflow = new Workflow(
+            (new BpmnDirLoader(__DIR__ . '/../BpmnDiagramsCallActivityDie')),
+            $this->walker,
+            true,
+            $traceStorage
+        );
         $cart = new Example\Cart\Cart(
             ['name' => 'cola', 'price' => 5000],
             'en',
@@ -102,7 +109,9 @@ class WorkflowTest extends TestCase
         );
         $context = new DataContext($cart);
         $workflow->walk('call_activity', $context);
+        $traces = $traceStorage->getTrace(new \DateTime('2022-05-11'), new \DateTime('2022-05-15'));
 
         self::assertEquals(2250, $cart->getPrice());
+        self::assertGreaterThan(0, count($traces));
     }
 }

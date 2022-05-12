@@ -5,12 +5,15 @@ namespace Gupalo\BpmnWorkflow\Bpmn\Symbol\Flow;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\NextSymbolAwareInterface;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\NextSymbolTrait;
 use Gupalo\BpmnWorkflow\Bpmn\Symbol\SymbolInterface;
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\UuidAwareInterface;
+use Gupalo\BpmnWorkflow\Bpmn\Symbol\UuidTrait;
 
-class SequenceFlow implements SymbolInterface, NextSymbolAwareInterface
+class SequenceFlow implements SymbolInterface, NextSymbolAwareInterface, UuidAwareInterface
 {
     private const DEFAULT_ORDER = 10000;
 
     use NextSymbolTrait;
+    use UuidTrait;
 
     private ?string $condition;
 

@@ -12,6 +12,6 @@ class CallActivityResolver implements SymbolResolverInterface
     #[Pure]
     public function resolve(SymbolInterface $symbol, XmlSymbol $xmlSymbol): SymbolInterface
     {
-        return new CallActivity($xmlSymbol->getData());
+        return (new CallActivity($xmlSymbol->getData()))->setUid($xmlSymbol->getUid());
     }
 }

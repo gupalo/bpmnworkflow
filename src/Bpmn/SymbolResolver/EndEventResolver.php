@@ -12,6 +12,7 @@ class EndEventResolver implements SymbolResolverInterface
     #[Pure]
     public function resolve(SymbolInterface $symbol, XmlSymbol $xmlSymbol): SymbolInterface
     {
-        return new EndEvent($xmlSymbol->getDefinition() === 'terminateEventDefinition');
+        return (new EndEvent($xmlSymbol->getDefinition() === 'terminateEventDefinition'))
+            ->setUid($xmlSymbol->getUid());
     }
 }

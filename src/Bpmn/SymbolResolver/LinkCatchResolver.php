@@ -12,6 +12,6 @@ class LinkCatchResolver implements SymbolResolverInterface
     #[Pure]
     public function resolve(SymbolInterface $symbol, XmlSymbol $xmlSymbol): SymbolInterface
     {
-        return new LinkCatch($xmlSymbol->getData());
+        return (new LinkCatch($xmlSymbol->getData()))->setUid($xmlSymbol->getUid());
     }
 }

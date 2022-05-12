@@ -12,6 +12,6 @@ class TaskResolver implements SymbolResolverInterface
     #[Pure]
     public function resolve(SymbolInterface $symbol, XmlSymbol $xmlSymbol): SymbolInterface
     {
-        return new Task($xmlSymbol->getData());
+        return (new Task($xmlSymbol->getData()))->setUid($xmlSymbol->getUid());
     }
 }
