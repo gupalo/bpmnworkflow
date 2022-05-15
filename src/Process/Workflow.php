@@ -56,11 +56,12 @@ class Workflow
      */
     public function walk(string $name, ContextInterface $context): void
     {
-        $contextBefore = clone $context;
+        $data = $context->getData();
+        $dataBefore = is_object($data) ? clone $data : $data ;
         $tracer = $this->saveTrace ? new Tracer() : null;
         $this->walker->walk($name, $context, $tracer);
         if ($this->saveTrace && $this->traceStorage instanceof TraceStorageInterface) {
-            $this->traceStorage->write($tracer, $contextBefore, $context);
+            $this->traceStorage->write($tracer, $dataBefore, $data);
         }
     }
 }

@@ -17,13 +17,16 @@ class TraceFileStorage implements TraceStorageInterface
         }
     }
 
-    public function write(Tracer $tracer, ContextInterface $contextBefore, ContextInterface $contextAfter): void
+    public function write(Tracer $tracer, $dataBefore, $dataAfter): void
     {
+        $mictotime = microtime(true);
         $filename = microtime(true) . '.' . self::TRACE_FILE_EXTENSION;
+        $dateFile = (new \DateTime())->setTimestamp($mictotime);
         $data = [
             'trace' => $tracer->getUidsIndexedProcess(),
-            'contextBefore' => $contextBefore->getData(),
-            'contextAfter' => $contextAfter->getData()
+            'dataBefore' => $dataBefore,
+            'dataAfter' => $dataAfter,
+            'date' => $dateFile
         ];
         file_put_contents($this->dirPath . $filename, serialize($data));
     }

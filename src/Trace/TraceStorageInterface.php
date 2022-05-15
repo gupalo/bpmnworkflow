@@ -6,7 +6,7 @@ use Gupalo\BpmnWorkflow\Context\ContextInterface;
 
 interface TraceStorageInterface
 {
-    public function write(Tracer $tracer, ContextInterface $contextBefore, ContextInterface $contextAfter): void;
+    public function write(Tracer $tracer, $dataBefore, $dataAfter): void;
 
     public function getTrace(?\DateTimeInterface $dateStart = null, ?\DateTimeInterface $dateEnd = null): array;
 }
